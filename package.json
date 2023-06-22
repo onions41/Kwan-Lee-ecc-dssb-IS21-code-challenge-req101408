@@ -1,0 +1,19 @@
+{
+  "name": "bc-public-service-challenge",
+  "version": "1.0.0",
+  "description": "Kwan-Lee-ecc-dssb-IS21-code-challenge-req101408",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Kwan Lee",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.22.5",
+    "@babel/core": "^7.22.5",
+    "@babel/node": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "nodemon": "^2.0.22"
+  }
+}
