@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node api_src/index.js",
+    "build": "./node_modules/.bin/babel api_src --out-dir api_build --copy-files --delete-dir-on-start",
+    "serve": "node api_build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
