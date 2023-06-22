@@ -4,6 +4,7 @@
   "description": "Kwan-Lee-ecc-dssb-IS21-code-challenge-req101408",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --exec babel-node api_src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
