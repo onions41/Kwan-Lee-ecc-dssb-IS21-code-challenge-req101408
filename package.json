@@ -4,7 +4,7 @@
   "description": "Kwan-Lee-ecc-dssb-IS21-code-challenge-req101408",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node api_src/index.js",
+    "start": "nodemon --exec babel-node -r dotenv/config api_src/index.js",
     "build": "./node_modules/.bin/babel api_src --out-dir api_build --copy-files --delete-dir-on-start",
     "serve": "node api_build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,9 +17,11 @@
     "@babel/core": "^7.22.5",
     "@babel/node": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
+    "dotenv": "^16.3.1",
     "nodemon": "^2.0.22"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2"
   }
 }
