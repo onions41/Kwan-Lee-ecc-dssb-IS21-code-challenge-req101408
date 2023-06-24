@@ -11,7 +11,7 @@ module.exports = [
       "Emily Thompson"
     ],
     scrumMasterName: "Chloe Ramirez",
-    startDate: "2018/04/15",
+    startDate: "2018-04-15",
     methodology: "Agile",
     location: "https://github.com/bcgov/webguru"
   },
@@ -21,7 +21,7 @@ module.exports = [
     productOwnerName: "Hannah Collins",
     developers: ["Jonathan Hall", "Henry Sanchez", "James Anderson", "Ava Carter"],
     scrumMasterName: "Isabella Wilson",
-    startDate: "2019/02/28",
+    startDate: "2019-02-28",
     methodology: "Agile",
     location: "https://github.com/bcgov/appwizard"
   },
@@ -31,7 +31,7 @@ module.exports = [
     productOwnerName: "Amelia Martinez",
     developers: ["Hannah Collins", "Andrew White", "Lily Torres", "Avery Green"],
     scrumMasterName: "Nathan Nelson",
-    startDate: "2017/11/16",
+    startDate: "2017-11-16",
     methodology: "Agile",
     location: "https://github.com/bcgov/codemaster"
   },
@@ -41,7 +41,7 @@ module.exports = [
     productOwnerName: "Madison Scott",
     developers: ["Robert Jones", "Ella Baker", "Olivia Brown", "Emily Thompson"],
     scrumMasterName: "James Anderson",
-    startDate: "2019/05/13",
+    startDate: "2019-05-13",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/sitesolutions"
   },
@@ -51,7 +51,7 @@ module.exports = [
     productOwnerName: "Avery Green",
     developers: ["Avery Green", "Christian Cook", "Ella Baker"],
     scrumMasterName: "Ella Baker",
-    startDate: "2017/04/19",
+    startDate: "2017-04-19",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/swiftpage"
   },
@@ -61,7 +61,7 @@ module.exports = [
     productOwnerName: "Sophia Davis",
     developers: ["John Smith", "Daniel Jackson"],
     scrumMasterName: "Ryan Lee",
-    startDate: "2014/06/15",
+    startDate: "2014-06-15",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/webworks"
   },
@@ -71,7 +71,7 @@ module.exports = [
     productOwnerName: "Daniel Jackson",
     developers: ["Elizabeth Walker", "Grace Phillips", "Jonathan Hall", "Gabriel Turner"],
     scrumMasterName: "Sophia Davis",
-    startDate: "2022/04/25",
+    startDate: "2022-04-25",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/digitallaunch"
   },
@@ -81,7 +81,7 @@ module.exports = [
     productOwnerName: "Avery Green",
     developers: ["Nicholas Wright", "Jonathan Hall", "Elizabeth Walker"],
     scrumMasterName: "Samuel Mitchell",
-    startDate: "2020/01/23",
+    startDate: "2020-01-23",
     methodology: "Agile",
     location: "https://github.com/bcgov/cloudweb"
   },
@@ -91,7 +91,7 @@ module.exports = [
     productOwnerName: "Sophia Davis",
     developers: ["Isabella Wilson", "John Smith", "Emma Johnson", "Nathan Nelson"],
     scrumMasterName: "Abigail Moore",
-    startDate: "2021/10/10",
+    startDate: "2021-10-10",
     methodology: "Agile",
     location: "https://github.com/bcgov/pixelperfect"
   },
@@ -101,7 +101,7 @@ module.exports = [
     productOwnerName: "Avery Green",
     developers: ["John Smith"],
     scrumMasterName: "Andrew White",
-    startDate: "2021/12/09",
+    startDate: "2021-12-09",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/iweb"
   },
@@ -117,7 +117,7 @@ module.exports = [
       "Hannah Collins"
     ],
     scrumMasterName: "Sophia Davis",
-    startDate: "2014/10/31",
+    startDate: "2014-10-31",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/webspark"
   },
@@ -127,7 +127,7 @@ module.exports = [
     productOwnerName: "Nathan Nelson",
     developers: ["Isabella Wilson", "Robert Jones", "Grace Phillips", "Sophia Davis"],
     scrumMasterName: "Henry Sanchez",
-    startDate: "2016/04/06",
+    startDate: "2016-04-06",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/appventure"
   },
@@ -137,7 +137,7 @@ module.exports = [
     productOwnerName: "Scarlett Adams",
     developers: ["Amelia Martinez", "Amelia Martinez"],
     scrumMasterName: "Christian Cook",
-    startDate: "2016/08/18",
+    startDate: "2016-08-18",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/codecraft"
   },
@@ -147,7 +147,7 @@ module.exports = [
     productOwnerName: "Christopher Rodriguez",
     developers: ["Olivia Brown"],
     scrumMasterName: "Sophia Davis",
-    startDate: "2017/07/07",
+    startDate: "2017-07-07",
     methodology: "Agile",
     location: "https://github.com/bcgov/webgenius"
   },
@@ -157,7 +157,7 @@ module.exports = [
     productOwnerName: "Christopher Rodriguez",
     developers: ["John Smith", "Henry Sanchez"],
     scrumMasterName: "Henry Sanchez",
-    startDate: "2021/02/21",
+    startDate: "2021-02-21",
     methodology: "Agile",
     location: "https://github.com/bcgov/sitebuilderx"
   },
@@ -167,7 +167,7 @@ module.exports = [
     productOwnerName: "Mia Thomas",
     developers: ["Sophia Davis", "Grace Phillips"],
     scrumMasterName: "Christian Cook",
-    startDate: "2019/08/06",
+    startDate: "2019-08-06",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/techconnect"
   },
@@ -183,7 +183,7 @@ module.exports = [
       "Isabella Wilson"
     ],
     scrumMasterName: "Elijah Reed",
-    startDate: "2021/09/04",
+    startDate: "2021-09-04",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/webpro"
   },
@@ -193,7 +193,7 @@ module.exports = [
     productOwnerName: "Gabriel Turner",
     developers: ["Grace Phillips", "Scarlett Adams"],
     scrumMasterName: "Lily Torres",
-    startDate: "2022/09/22",
+    startDate: "2022-09-22",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/appifyme"
   },
@@ -203,7 +203,7 @@ module.exports = [
     productOwnerName: "Ella Baker",
     developers: ["Christopher Rodriguez", "Michael Williams", "Andrew White"],
     scrumMasterName: "Victoria Stewart",
-    startDate: "2019/07/26",
+    startDate: "2019-07-26",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/codegenius"
   },
@@ -213,7 +213,7 @@ module.exports = [
     productOwnerName: "Ryan Lee",
     developers: ["Amelia Martinez", "Nicholas Wright", "Hannah Collins", "Joseph Taylor"],
     scrumMasterName: "Chloe Ramirez",
-    startDate: "2017/10/03",
+    startDate: "2017-10-03",
     methodology: "Agile",
     location: "https://github.com/bcgov/webwizard"
   },
@@ -223,7 +223,7 @@ module.exports = [
     productOwnerName: "Amelia Martinez",
     developers: ["Victoria Stewart"],
     scrumMasterName: "Charlotte Clark",
-    startDate: "2018/12/11",
+    startDate: "2018-12-11",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/digitaledge"
   },
@@ -233,7 +233,7 @@ module.exports = [
     productOwnerName: "Nicholas Wright",
     developers: ["Andrew White", "Christopher Rodriguez", "Matthew Davis", "Abigail Moore"],
     scrumMasterName: "Christopher Rodriguez",
-    startDate: "2014/06/24",
+    startDate: "2014-06-24",
     methodology: "Agile",
     location: "https://github.com/bcgov/cloudbuilder"
   },
@@ -243,7 +243,7 @@ module.exports = [
     productOwnerName: "Ava Carter",
     developers: ["Joseph Taylor", "Samuel Mitchell", "Elijah Reed", "Abigail Moore"],
     scrumMasterName: "Elijah Reed",
-    startDate: "2019/02/07",
+    startDate: "2019-02-07",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/pixelweb"
   },
@@ -253,7 +253,7 @@ module.exports = [
     productOwnerName: "Emma Johnson",
     developers: ["Chloe Ramirez", "Elizabeth Walker"],
     scrumMasterName: "Emma Johnson",
-    startDate: "2017/07/03",
+    startDate: "2017-07-03",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/icode"
   },
@@ -263,7 +263,7 @@ module.exports = [
     productOwnerName: "Chloe Ramirez",
     developers: ["Abigail Moore"],
     scrumMasterName: "Daniel Jackson",
-    startDate: "2023/02/17",
+    startDate: "2023-02-17",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/webmagic"
   },
@@ -273,7 +273,7 @@ module.exports = [
     productOwnerName: "Scarlett Adams",
     developers: ["Christian Cook"],
     scrumMasterName: "Ella Baker",
-    startDate: "2020/01/19",
+    startDate: "2020-01-19",
     methodology: "Agile",
     location: "https://github.com/bcgov/appmakers"
   },
@@ -283,7 +283,7 @@ module.exports = [
     productOwnerName: "Nicholas Wright",
     developers: ["Christopher Rodriguez"],
     scrumMasterName: "Emma Johnson",
-    startDate: "2022/03/11",
+    startDate: "2022-03-11",
     methodology: "Agile",
     location: "https://github.com/bcgov/codesprint"
   },
@@ -293,7 +293,7 @@ module.exports = [
     productOwnerName: "Scarlett Adams",
     developers: ["Samantha Hill"],
     scrumMasterName: "Michael Williams",
-    startDate: "2014/03/15",
+    startDate: "2014-03-15",
     methodology: "Agile",
     location: "https://github.com/bcgov/webwhiz"
   },
@@ -303,7 +303,7 @@ module.exports = [
     productOwnerName: "Ava Carter",
     developers: ["Ava Carter", "Lily Torres", "Avery Green", "William Miller", "Matthew Davis"],
     scrumMasterName: "Christian Cook",
-    startDate: "2014/05/26",
+    startDate: "2014-05-26",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/sitegen"
   },
@@ -313,7 +313,7 @@ module.exports = [
     productOwnerName: "Gabriel Turner",
     developers: ["Samantha Hill", "Matthew Davis", "Chloe Ramirez", "Christian Cook"],
     scrumMasterName: "Victoria Stewart",
-    startDate: "2018/12/07",
+    startDate: "2018-12-07",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/techweb"
   },
@@ -323,7 +323,7 @@ module.exports = [
     productOwnerName: "Olivia Brown",
     developers: ["Nicholas Wright", "Grace Phillips"],
     scrumMasterName: "William Miller",
-    startDate: "2015/08/16",
+    startDate: "2015-08-16",
     methodology: "Agile",
     location: "https://github.com/bcgov/websolutions"
   },
@@ -333,7 +333,7 @@ module.exports = [
     productOwnerName: "Robert Jones",
     developers: ["Charlotte Clark", "Samuel Mitchell"],
     scrumMasterName: "Benjamin Young",
-    startDate: "2015/01/07",
+    startDate: "2015-01-07",
     methodology: "Agile",
     location: "https://github.com/bcgov/applaunch"
   },
@@ -349,7 +349,7 @@ module.exports = [
       "Grace Phillips"
     ],
     scrumMasterName: "Hannah Collins",
-    startDate: "2014/05/22",
+    startDate: "2014-05-22",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/codespark"
   },
@@ -359,7 +359,7 @@ module.exports = [
     productOwnerName: "Ryan Lee",
     developers: ["Benjamin Young", "Olivia Brown", "Madison Scott", "Benjamin Young"],
     scrumMasterName: "Avery Green",
-    startDate: "2016/03/02",
+    startDate: "2016-03-02",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/webcraft"
   },
@@ -375,7 +375,7 @@ module.exports = [
       "William Miller"
     ],
     scrumMasterName: "William Miller",
-    startDate: "2014/08/10",
+    startDate: "2014-08-10",
     methodology: "Agile",
     location: "https://github.com/bcgov/digitalweb"
   },
@@ -385,7 +385,7 @@ module.exports = [
     productOwnerName: "James Anderson",
     developers: ["Elijah Reed", "Matthew Davis"],
     scrumMasterName: "Christopher Rodriguez",
-    startDate: "2014/11/01",
+    startDate: "2014-11-01",
     methodology: "Agile",
     location: "https://github.com/bcgov/cloudgenius"
   },
@@ -395,7 +395,7 @@ module.exports = [
     productOwnerName: "Isabella Wilson",
     developers: ["Matthew Davis", "Amelia Martinez"],
     scrumMasterName: "Nathan Nelson",
-    startDate: "2021/05/08",
+    startDate: "2021-05-08",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/pixelbuilder"
   },
@@ -411,7 +411,7 @@ module.exports = [
       "Chloe Ramirez"
     ],
     scrumMasterName: "William Miller",
-    startDate: "2020/09/29",
+    startDate: "2020-09-29",
     methodology: "Waterfall",
     location: "https://github.com/bcgov/iwebgen"
   },
@@ -421,7 +421,7 @@ module.exports = [
     productOwnerName: "Jonathan Hall",
     developers: ["Mia Thomas", "Benjamin Young"],
     scrumMasterName: "Benjamin Young",
-    startDate: "2020/11/02",
+    startDate: "2020-11-02",
     methodology: "Agile",
     location: "https://github.com/bcgov/webx"
   },
@@ -431,7 +431,7 @@ module.exports = [
     productOwnerName: "Matthew Davis",
     developers: ["Ella Baker", "Victoria Stewart"],
     scrumMasterName: "Charlotte Clark",
-    startDate: "2022/12/31",
+    startDate: "2022-12-31",
     methodology: "Agile",
     location: "https://github.com/bcgov/techwhiz"
   },
@@ -447,7 +447,7 @@ module.exports = [
       "Gabriel Turner"
     ],
     scrumMasterName: "Grace Phillips",
-    startDate: "2015/11/01",
+    startDate: "2015-11-01",
     methodology: "Agile",
     location: "https://github.com/bcgov/webninja"
   },
@@ -457,7 +457,7 @@ module.exports = [
     productOwnerName: "Abigail Moore",
     developers: ["Joseph Taylor", "Emma Johnson", "Benjamin Young"],
     scrumMasterName: "Elijah Reed",
-    startDate: "2020/08/11",
+    startDate: "2020-08-11",
     methodology: "Agile",
     location: "https://github.com/bcgov/appgenius"
   },
@@ -467,7 +467,7 @@ module.exports = [
     productOwnerName: "Hannah Collins",
     developers: ["John Smith", "Chloe Ramirez"],
     scrumMasterName: "Elizabeth Walker",
-    startDate: "2016/02/13",
+    startDate: "2016-02-13",
     methodology: "Agile",
     location: "https://github.com/bcgov/codesensei"
   }
