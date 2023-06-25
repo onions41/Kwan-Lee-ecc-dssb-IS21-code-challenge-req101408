@@ -403,7 +403,7 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                 id="location"
                 name="location"
                 label="Location"
-                // helperText={errors?.location && touched.location && errors.location}
+                helperText='Must begin with "https://github.com/bcgov/"'
                 type="text"
                 size="small"
                 variant="filled"
