@@ -1,6 +1,7 @@
 {
-  "name": "bc-public-service-challenge",
+  "name": "kwan-lee-bc-public-service-code-challenge",
   "version": "1.0.0",
+  "private": true,
   "description": "Kwan-Lee-ecc-dssb-IS21-code-challenge-req101408",
   "main": "index.js",
   "scripts": {
