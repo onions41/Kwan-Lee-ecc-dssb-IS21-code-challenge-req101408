@@ -82,7 +82,12 @@ const VirtuosoTableComponents = {
       sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
     />
   ),
-  TableHead,
+  TableHead: (props) => (
+    <TableHead
+      {...props}
+      sx={{ boxShadow: "0px 1px 3px 0px #989898", WebkitBoxShadow: "0px 1px 3px 0px #989898" }}
+    />
+  ),
   TableRow,
   TableBody: forwardRef((props, ref) => (
     <TableBody
