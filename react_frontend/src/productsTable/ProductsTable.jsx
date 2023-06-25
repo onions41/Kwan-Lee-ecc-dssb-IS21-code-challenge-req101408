@@ -1,5 +1,6 @@
-import { Container, Box } from "@mui/material";
-import { useState, useEffect, forwardRef } from "react";
+import { forwardRef } from "react";
+
+// MUI (UI components)
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,47 +12,62 @@ import { TableVirtuoso } from "react-virtuoso";
 
 const columns = [
   {
-    width: 200,
+    width: 30,
     label: "Product Number",
-    dataKey: "productId"
+    dataKey: "productId",
+    fontSize: 11
   },
   {
-    width: 120,
+    width: 25,
     label: "Product Name",
-    dataKey: "productName"
+    dataKey: "productName",
+    fontSize: 14
   },
   {
-    width: 120,
+    width: 25,
     label: "Owner",
-    dataKey: "productOwnerName"
+    dataKey: "productOwnerName",
+    fontSize: 14
   },
   {
-    width: 120,
+    width: 25,
     label: "Scrum Master",
-    dataKey: "scrumMasterName"
+    dataKey: "scrumMasterName",
+    fontSize: 14
   },
   {
-    width: 120,
+    width: 55,
     label: "Developers",
-    dataKey: "developers"
+    dataKey: "developers",
+    fontSize: 12
   },
   {
-    width: 120,
+    width: 15,
     label: "Start Date",
-    dataKey: "startDate"
+    dataKey: "startDate",
+    fontSize: 14
   },
   {
-    width: 120,
+    width: 15,
     label: "Methodology",
-    dataKey: "methodology"
+    dataKey: "methodology",
+    fontSize: 14
   },
   {
-    width: 120,
+    width: 30,
     label: "Location",
-    dataKey: "location"
+    dataKey: "location",
+    fontSize: 12
+  },
+  {
+    width: 5,
+    label: "Edit",
+    dataKey: "edit",
+    fontSize: 12
   }
 ];
 
+// Determines which table components to use from Virtuoso table library
 const VirtuosoTableComponents = {
   Scroller: forwardRef((props, ref) => (
     <TableContainer
@@ -67,7 +83,7 @@ const VirtuosoTableComponents = {
     />
   ),
   TableHead,
-  TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
+  TableRow,
   TableBody: forwardRef((props, ref) => (
     <TableBody
       {...props}
@@ -76,6 +92,7 @@ const VirtuosoTableComponents = {
   ))
 };
 
+// Generates table headers
 function fixedHeaderContent() {
   return (
     <TableRow>
@@ -85,7 +102,11 @@ function fixedHeaderContent() {
           variant="head"
           style={{ width: column.width }}
           sx={{
-            backgroundColor: "background.paper"
+            backgroundColor: "grey.300",
+            fontSize: "htmlFontSize",
+            fontWeight: "fontWeightMedium",
+            padding: "14px 4px 10px 16px",
+            lineHeight: "1"
           }}
         >
           {column.label}
@@ -95,23 +116,47 @@ function fixedHeaderContent() {
   );
 }
 
-function rowContent(_index, row) {
+// Generates content of each cell by mapping columns against rows of data
+function itemContent(_index, row) {
   return (
     <>
-      {columns.map((column) => (
-        <TableCell key={column.dataKey}>{row[column.dataKey]}</TableCell>
-      ))}
+      {columns.map((column) => {
+        if (column.dataKey === "developers") {
+          // Separates developer names with bullet and stops line break occuring inside a name
+          return (
+            <TableCell
+              key={column.dataKey}
+              sx={{ fontSize: column.fontSize }}
+            >
+              {row[column.dataKey].map((developerName) => {
+                developerName = developerName.replace(/ /g, "\u00A0");
+                return <span>{`\u2022${developerName} `}</span>;
+              })}
+            </TableCell>
+          );
+        }
+        // Other columns
+        return (
+          <TableCell
+            key={column.dataKey}
+            sx={{ fontSize: column.fontSize }}
+          >
+            {row[column.dataKey]}
+          </TableCell>
+        );
+      })}
     </>
   );
 }
 
+// React component that renders the table
 export default function ProductsTable({ products }) {
   return (
     <TableVirtuoso
       data={products}
       components={VirtuosoTableComponents}
       fixedHeaderContent={fixedHeaderContent}
-      itemContent={rowContent}
+      itemContent={itemContent}
     />
   );
 }
