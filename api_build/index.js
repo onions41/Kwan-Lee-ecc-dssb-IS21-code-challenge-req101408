@@ -52,7 +52,7 @@ app.post("/api/product", function (req, res) {
 
 // Catch all for unused routes and verbs
 app.use((_req, res) => {
-  res.status(404).send("404 - Not Found");
+  res.status(404).send("404 - This endpoint and verb is not used");
 });
 
 // Start the server
