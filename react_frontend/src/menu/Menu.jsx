@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 
 // The top-bar menu
-export default function Menu({ setIsAddProdModalOpen }) {
+export default function Menu({ setIsAddProdModalOpen, productTotal }) {
   return (
     <Box
       sx={{
@@ -53,14 +53,32 @@ export default function Menu({ setIsAddProdModalOpen }) {
             Kwan-Lee-ecc-dssb-IS21-code-challenge-req101408
           </Typography>
         </Stack>
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={() => setIsAddProdModalOpen(true)}
-          color="success"
+        <Typography
+          variant="body1"
+          component="h1"
+          color="success.contrastText"
+          sx={{
+            padding: "2px 6px 0",
+            borderRadius: "4px",
+            backgroundColor: "success.main"
+          }}
         >
-          Add Product
-        </Button>
+          {`Total number of products: ${productTotal}`}
+        </Typography>
+        <Stack
+          direction="row"
+          alignItems="center"
+          spacing={2}
+        >
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            onClick={() => setIsAddProdModalOpen(true)}
+            color="success"
+          >
+            Add Product
+          </Button>
+        </Stack>
       </Container>
     </Box>
   );
