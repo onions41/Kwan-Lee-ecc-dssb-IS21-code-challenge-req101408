@@ -76,7 +76,7 @@ export default function Menu({ setIsAddProdModalOpen, productTotal }) {
             onClick={() => setIsAddProdModalOpen(true)}
             color="success"
           >
-            Add Product
+            Add New Product
           </Button>
         </Stack>
       </Container>
