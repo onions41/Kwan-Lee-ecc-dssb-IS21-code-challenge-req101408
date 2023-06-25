@@ -82,12 +82,13 @@ const VirtuosoTableComponents = {
       sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
     />
   ),
-  TableHead: (props) => (
+  TableHead: forwardRef((props, ref) => (
     <TableHead
       {...props}
+      ref={ref}
       sx={{ boxShadow: "0px 1px 3px 0px #989898", WebkitBoxShadow: "0px 1px 3px 0px #989898" }}
     />
-  ),
+  )),
   TableRow,
   TableBody: forwardRef((props, ref) => (
     <TableBody
@@ -133,9 +134,9 @@ function itemContent(_index, row) {
               key={column.dataKey}
               sx={{ fontSize: column.fontSize }}
             >
-              {row[column.dataKey].map((developerName) => {
+              {row[column.dataKey].map((developerName, i) => {
                 developerName = developerName.replace(/ /g, "\u00A0");
-                return <span>{`\u2022${developerName} `}</span>;
+                return <span key={`${column.dataKey}-${i}`}>{`\u2022${developerName} `}</span>;
               })}
             </TableCell>
           );
