@@ -224,7 +224,7 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   gridColumn: "span 2"
                 }}
               >
-                Enter up to 5 developers
+                Enter at least 1 developer
               </Typography>
               {/* Developer 1 Name */}
               <TextField
