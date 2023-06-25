@@ -2,6 +2,7 @@
 const express = require("express");
 const path = require("path");
 const mockData = require("./mockData");
+var crypto = require("crypto");
 
 const app = express();
 
@@ -38,8 +39,9 @@ app.get("/api/product", function (_req, res) {
 app.post("/api/product", function (req, res) {
   try {
     // TODO: Validate request body, should fit data shape. throw error if not
-    mockData.push(req.body);
-    res.send(200).json({ wasSuccessful: true, data: req.body });
+    req.body.productId = crypto.randomUUID();
+    mockData.splice(0, 0, req.body);
+    res.status(200).json({ wasSuccessful: true, data: req.body });
   } catch (error) {
     res.status(400).json({ wasSuccessful: false, error });
   }
