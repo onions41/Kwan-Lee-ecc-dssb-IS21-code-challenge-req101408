@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 
 // MUI (UI components)
+import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -141,7 +142,26 @@ function itemContent(_index, row) {
             </TableCell>
           );
         }
-        // Other columns
+        // Location column cells are links
+        if (column.dataKey === "location") {
+          return (
+            <TableCell
+              key={column.dataKey}
+              sx={{ fontSize: column.fontSize }}
+            >
+              <Link
+                href={row[column.dataKey]}
+                target="_blank"
+                rel="noopener"
+                underline="hover"
+              >
+                {row[column.dataKey]}
+              </Link>
+            </TableCell>
+          );
+        }
+        // Edit column (contains button to edit each row)
+        // All other columns
         return (
           <TableCell
             key={column.dataKey}
