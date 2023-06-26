@@ -26,7 +26,7 @@ app.get("/", function (_req, res) {
   res.sendFile(path.join(__dirname, "..", "react_frontend", "build", "index.html"));
 });
 
-// Read all products
+// Get all products
 app.get("/api/product", function (_req, res) {
   try {
     res.status(200).json(mockData);
@@ -42,6 +42,21 @@ app.post("/api/product", function (req, res) {
     req.body.productId = crypto.randomUUID();
     mockData.splice(0, 0, req.body);
     res.status(200).json({ wasSuccessful: true, data: req.body });
+  } catch (error) {
+    res.status(400).json({ wasSuccessful: false, error });
+  }
+});
+
+// Edit an existing product
+app.put("/api/product/:productId", function (req, res) {
+  try {
+    // TODO: Validate request body, should fit data shape. throw error if not
+    const index = mockData.findIndex((row) => row.productId === req.params.productId);
+    if (index === -1) {
+      throw new Error("Could not find an existing product with matching Product Number")
+    }
+    mockData[index] = { ...mockData[index], ...req.body };
+    res.status(200).json({ wasSuccessful: true, data: mockData[index] });
   } catch (error) {
     res.status(400).json({ wasSuccessful: false, error });
   }

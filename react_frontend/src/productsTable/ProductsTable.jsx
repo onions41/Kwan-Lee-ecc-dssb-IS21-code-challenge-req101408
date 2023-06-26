@@ -1,7 +1,8 @@
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 
 // MUI (UI components)
 import Link from "@mui/material/Link";
+import Button from "@mui/material/Button";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,7 +12,16 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
 
+// Internal imports
+import EditProductModal from "./editProductModal/EditProductModal";
+
 const columns = [
+  {
+    width: 5,
+    label: "Row #",
+    dataKey: "row#",
+    fontSize: 14
+  },
   {
     width: 30,
     label: "Product Number",
@@ -113,6 +123,7 @@ function fixedHeaderContent() {
             fontSize: "htmlFontSize",
             fontWeight: "fontWeightMedium",
             padding: "14px 4px 10px 16px",
+            textAlign: column.dataKey === "row#" ? "center" : "left",
             lineHeight: "1"
           }}
         >
@@ -124,11 +135,25 @@ function fixedHeaderContent() {
 }
 
 // Generates content of each cell by mapping columns against rows of data
-function itemContent(_index, row) {
+function itemContent(setEditProdModalState, index, row) {
   return (
     <>
       {columns.map((column) => {
+        // Row # column
+        if (column.dataKey === "row#") {
+          // Developers column
+          // Separates developer names with bullet and stops line break occuring inside a name
+          return (
+            <TableCell
+              key={column.dataKey}
+              sx={{ fontSize: column.fontSize, textAlign: "center" }}
+            >
+              {index + 1}
+            </TableCell>
+          );
+        }
         if (column.dataKey === "developers") {
+          // Developers column
           // Separates developer names with bullet and stops line break occuring inside a name
           return (
             <TableCell
@@ -142,7 +167,7 @@ function itemContent(_index, row) {
             </TableCell>
           );
         }
-        // Location column cells are links
+        // Location column. Cells are links
         if (column.dataKey === "location") {
           return (
             <TableCell
@@ -161,6 +186,32 @@ function itemContent(_index, row) {
           );
         }
         // Edit column (contains button to edit each row)
+        if (column.dataKey === "edit") {
+          // Shape the product object to be flat
+          const { developers, ...rest } = row;
+          const product = {
+            ...rest,
+            developer1Name: developers[0] ? developers[0] : "",
+            developer2Name: developers[1] ? developers[1] : "",
+            developer3Name: developers[2] ? developers[2] : "",
+            developer4Name: developers[3] ? developers[3] : "",
+            developer5Name: developers[4] ? developers[4] : ""
+          };
+          return (
+            <TableCell
+              key={column.dataKey}
+              sx={{ fontSize: column.fontSize }}
+            >
+              <Button
+                color="warning"
+                size="small"
+                onClick={() => setEditProdModalState({ isOpen: true, product })}
+              >
+                Edit
+              </Button>
+            </TableCell>
+          );
+        }
         // All other columns
         return (
           <TableCell
@@ -176,13 +227,23 @@ function itemContent(_index, row) {
 }
 
 // React component that renders the table
-export default function ProductsTable({ products }) {
+export default function ProductsTable({ products, dispatch }) {
+  const [editProdModalState, setEditProdModalState] = useState({ isOpen: false, product: {} });
+
   return (
-    <TableVirtuoso
-      data={products}
-      components={VirtuosoTableComponents}
-      fixedHeaderContent={fixedHeaderContent}
-      itemContent={itemContent}
-    />
+    <>
+      <TableVirtuoso
+        data={products}
+        components={VirtuosoTableComponents}
+        fixedHeaderContent={fixedHeaderContent}
+        itemContent={itemContent.bind({}, setEditProdModalState)}
+      />
+      <EditProductModal
+        isOpen={editProdModalState.isOpen}
+        product={editProdModalState.product}
+        setModalState={setEditProdModalState}
+        dispatch={dispatch}
+      />
+    </>
   );
 }

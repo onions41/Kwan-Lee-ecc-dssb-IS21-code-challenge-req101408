@@ -1,5 +1,5 @@
 import { Container, Box } from "@mui/material";
-import { useState, useEffect, useCallback, useReducer } from "react";
+import { useState, useEffect, useReducer } from "react";
 
 // Components
 import Menu from "./menu/Menu";
@@ -14,6 +14,12 @@ export default function App() {
         return action.data;
       case "addedNewProd":
         return [action.data].concat(products);
+      case "editedProd":
+        const index = products.findIndex((row) => row.productId === action.data.productId);
+        if (index !== -1) {
+          products[index] = { ...products[index], ...action.data };
+        }
+        return products;
       default:
         throw new Error("Invalid prodDispatch action");
     }
@@ -26,11 +32,12 @@ export default function App() {
     })
       .then(async (response) => {
         const resData = await response.json();
-        prodDispatch({ type: "fetchedAllProd", data: resData })
-        setProdFetchState({ loading: false, error: false});
+        // If the API retursns 500. there won't be an error, there. You need to catch that error.
+        prodDispatch({ type: "fetchedAllProd", data: resData });
+        setProdFetchState({ loading: false, error: false });
       })
       .catch((error) => {
-        // Network errors and 404s
+        // Connection error
         setProdFetchState({ loading: false, error });
       });
   }, []);
@@ -52,14 +59,17 @@ export default function App() {
         flexDirection: "column"
       }}
     >
-      <Menu setIsAddProdModalOpen={setIsAddProdModalOpen} />
+      <Menu
+        setIsAddProdModalOpen={setIsAddProdModalOpen}
+        productTotal={products.length}
+      />
       <Container
         maxWidth="xl"
         // root edited to remove default horizontal padding
         sx={{ flexGrow: 1, "&.MuiContainer-root": { padding: "0px" } }}
       >
         <Box sx={{ width: "100%", height: "100%", padding: "20px 0 0" }}>
-          <ProductsTable products={products} />
+          <ProductsTable products={products} dispatch={prodDispatch} />
         </Box>
       </Container>
       <AddProductModal
