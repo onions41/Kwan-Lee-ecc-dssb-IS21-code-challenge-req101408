@@ -1,7 +1,10 @@
 const express = require("express");
 const path = require("path");
-const mockData = require("./mockData");
 const crypto = require("crypto");
+
+// Internal imports
+const mockData = require("./mockData");
+const validateFormInput = require("./validateFormInput");
 
 // Initializes server
 const app = express();
@@ -47,7 +50,14 @@ app.get("/api/product", function (_req, res) {
 // Create a new product
 app.post("/api/product", function (req, res) {
   try {
-    // Form data validation would go here
+    // Input validation
+    if (!validateFormInput(req.body)) {
+      throw new Error("Invalid input. Form was not filled out correctly", {
+        cause: "bad input"
+      });
+    }
+
+    // Passed Validation
 
     // Generate a product ID for the new product
     req.body.productId = crypto.randomUUID();
@@ -56,6 +66,11 @@ app.post("/api/product", function (req, res) {
     // Respond with the new product that now has a product ID
     res.status(200).json(req.body);
   } catch (error) {
+    // User fault error
+    if ("cause" in error && error.cause === "bad input") {
+      res.status(422).send(error.message);
+    }
+    // All other errors
     res.status(500).send(error.message);
   }
 });
@@ -63,8 +78,12 @@ app.post("/api/product", function (req, res) {
 // Edit an existing product
 app.put("/api/product/:productId", function (req, res) {
   try {
-    // Form data validation would go here
-
+    // Input validation
+    if (!validateFormInput(req.body)) {
+      throw new Error("Invalid input. Form was not filled out correctly", {
+        cause: "bad input"
+      });
+    }
     // Looks for product to edit. Throw error if not found
     const index = mockData.findIndex((row) => row.productId === req.params.productId);
     if (index === -1) {
@@ -72,6 +91,9 @@ app.put("/api/product/:productId", function (req, res) {
         cause: "bad input"
       });
     }
+
+    // Passed validation
+
     // Edits the product and responds with the result
     mockData[index] = { ...mockData[index], ...req.body };
     res.status(200).json(mockData[index]);
