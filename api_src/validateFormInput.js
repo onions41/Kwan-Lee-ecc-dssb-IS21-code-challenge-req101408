@@ -3,7 +3,7 @@
  * that contains certain keys. This is a bare-bones validation. It can
  * be extended to make validation much more robust if needed in future.
  */
-function validateFormInput(reqBody) {
+export default function validateFormInput(reqBody) {
   if (typeof reqBody !== "object" || reqBody === null) {
     // Not an object or array
     return false;
