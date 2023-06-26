@@ -1,6 +1,7 @@
 import { useCallback, useState, useRef } from "react";
+
+// Form library
 import { Formik } from "formik";
-// import { object, string } from "yup";
 
 // MUI (UI components)
 import styled from "@mui/material/styles/styled";
@@ -47,19 +48,13 @@ const FormContainer = styled(Box)({
 // Used to valify that the URL location of product starts with "https://github.com/bcgov/"
 const locationPattern = new RegExp("https://github.com/bcgov/.+");
 
-// Additional validattions, use if needed
-// const validationSchema = object({
-//   // nickname: string().required().trim().min(2).max(50),
-//   // password: string().required().min(5).max(100)
-// });
-
-// Modal containing the form to add a new product
+// Modal containing the form to edit an existing product
 export default function EditProdModal({ isOpen, setModalState, product, dispatch }) {
   // Used to open or close confirmation dialog
   const [isEditProdDialOpen, setIsEditProdDialOpen] = useState(false);
   // Used to open the error dialog when submit fails
   const [isErrorDialOpen, setIsErrorDialOpen] = useState(false);
-  const { current: errorObj } = useRef({});
+  const errorRef = useRef("");
 
   // Callback that runs when the form is submitted
   const onSubmit = useCallback(
@@ -75,7 +70,7 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
       }
       shapedValues.developers = developers;
 
-      // Makes POST request to the API to add a new product
+      // Makes PUT request to the API to edit a product identified URL param
       fetch(`${process.env.REACT_APP_API_SERVER_URL}/product/${shapedValues.productId}`, {
         method: "PUT",
         headers: {
@@ -84,27 +79,24 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
         body: JSON.stringify(shapedValues)
       })
         .then(async (response) => {
-          // Request was successful
-          // Indicates whether or not API successfully committed the data
-          const resObj = await response.json();
-          if (resObj.wasSuccessful) {
-            // Update the interface with optimistic response
-            dispatch({ type: "editedProd", data: resObj.data });
-            setModalState({ isOpen: false, product: {} });
-          } else {
-            errorObj.errorType = "Validation Error";
-            errorObj.errorMsg = resObj.error;
-            setIsErrorDialOpen(true);
+          // Response health check
+          if (!response.ok) {
+            throw new Error(await response.text());
           }
+          // Response is healthy
+          const resObj = await response.json(); // The edited product
+          // Updates the interface
+          dispatch({ type: "editedProd", data: resObj });
+          // Closes the modal
+          setModalState({ isOpen: false, product: {} });
         })
         .catch((error) => {
-          // Request failed. There was a network error
-          errorObj.errorType = "Network Error";
-          errorObj.errorMsg = error;
+          // Catches both network errors (no response) and unhealthy response errors
+          errorRef.current = error.message;
           setIsErrorDialOpen(true);
         });
     },
-    [dispatch, setModalState, errorObj]
+    [dispatch, setModalState, errorRef]
   );
 
   return (
@@ -125,29 +117,18 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
         {/* Form logic starts here */}
         <Formik
           initialValues={product}
-          // validationSchema={validationSchema}
           validateOnBlur={false}
           validateOnChange={false}
           onSubmit={onSubmit}
         >
           {/* Formik child component (fields, buttons, confirmation dialogs) */}
-          {({
-            values,
-            handleChange,
-            handleSubmit,
-            // errors,
-            handleBlur,
-            isSubmitting
-            // touched,
-            // resetForm
-          }) => (
+          {({ values, handleChange, handleSubmit, handleBlur, isSubmitting }) => (
             <FormContainer>
               {/* Product Name field*/}
               <TextField
                 id="productName"
                 name="productName"
                 label="Product Name"
-                // helperText={errors?.productName && touched.productName && errors.productName}
                 type="text"
                 autoComplete="productName"
                 variant="filled"
@@ -155,7 +136,6 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 value={values.productName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // error={errors?.productName && touched.productName}
                 autoFocus
                 sx={{
                   // width: "calc(50% - 12px)",
@@ -164,22 +144,21 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 }}
               />
               {/* Shows ID of product being edited */}
-              <Typography>{`Product ID: ${values.productId}`}</Typography>
+              <Box pt={1}>
+                <Typography>Product Number</Typography>
+                <Typography variant="caption">{values.productId}</Typography>
+              </Box>
               {/* Product Owner Name field */}
               <TextField
                 id="productOwnerName"
                 name="productOwnerName"
                 label="Owner"
-                // helperText={
-                //   errors?.productOwnerName && touched.productOwnerName && errors.productOwnerName
-                // }
                 type="text"
                 size="small"
                 variant="filled"
                 value={values.productOwnerName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // error={errors?.productOwnerName && touched.productOwnerName}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -190,16 +169,12 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 id="scrumMasterName"
                 name="scrumMasterName"
                 label="Scrum Master"
-                // helperText={
-                //   errors?.scrumMasterName && touched.scrumMasterName && errors.scrumMasterName
-                // }
                 type="text"
                 size="small"
                 variant="filled"
                 value={values.scrumMasterName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // error={errors?.scrumMasterName && touched.scrumMasterName}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -219,16 +194,12 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 id="developer1Name"
                 name="developer1Name"
                 label="Developer 1"
-                // helperText={
-                //   errors?.developer1Name && touched.developer1Name && errors.developer1Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
                 value={values.developer1Name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // error={errors?.developer1Name && touched.developer1Name}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -239,16 +210,12 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 id="developer2Name"
                 name="developer2Name"
                 label="Developer 2"
-                // helperText={
-                //   errors?.developer2Name && touched.developer2Name && errors.developer2Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
                 value={values.developer2Name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // error={errors?.developer2Name && touched.developer2Name}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -259,9 +226,6 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 id="developer3Name"
                 name="developer3Name"
                 label="Developer 3"
-                // helperText={
-                //   errors?.developer3Name && touched.developer3Name && errors.developer3Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
@@ -269,7 +233,6 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 value={values.developer3Name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // error={errors?.developer3Name && touched.developer3Name}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -280,16 +243,12 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 id="developer4Name"
                 name="developer4Name"
                 label="Developer 4"
-                // helperText={
-                //   errors?.developer4Name && touched.developer4Name && errors.developer4Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
                 value={values.developer4Name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // error={errors?.developer4Name && touched.developer4Name}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -300,16 +259,12 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 id="developer5Name"
                 name="developer5Name"
                 label="Developer 5"
-                // helperText={
-                //   errors?.developer5Name && touched.developer5Name && errors.developer5Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
                 value={values.developer5Name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // error={errors?.developer5Name && touched.developer5Name}
                 sx={{
                   width: "calc(50% - 12px)",
                   marginTop: 1,
@@ -330,13 +285,11 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
               <TextField
                 id="startDate"
                 name="startDate"
-                // helperText={errors?.startDate && touched.startDate && errors.startDate}
                 type="text"
                 size="small"
                 variant="outlined"
                 value={values.startDate}
                 disabled={true}
-                // error={errors?.startDate && touched.startDate}
                 inputProps={{ type: "date" }}
                 sx={{
                   marginTop: 0,
@@ -376,7 +329,6 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
                 value={values.location}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // error={errors?.location && touched.location}
                 sx={{
                   marginTop: 1,
                   marginBottom: 5,
@@ -402,7 +354,7 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
               >
                 Submit
               </Button>
-              {/* Clear Fields Button */}
+              {/* Cancel Button */}
               <Button
                 variant="outlined"
                 color="error"
@@ -421,8 +373,7 @@ export default function EditProdModal({ isOpen, setModalState, product, dispatch
               <EditProdErrorDialog
                 isOpen={isErrorDialOpen}
                 setIsOpen={setIsErrorDialOpen}
-                errorType={errorObj.errorType}
-                errorMsg={errorObj.errorMsg}
+                errorRef={errorRef}
               />
             </FormContainer>
           )}
