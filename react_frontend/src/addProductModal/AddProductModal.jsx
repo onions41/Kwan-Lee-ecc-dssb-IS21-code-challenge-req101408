@@ -1,6 +1,7 @@
 import { useCallback, useState, useRef } from "react";
+
+// Form library
 import { Formik } from "formik";
-// import { object, string } from "yup";
 
 // MUI (UI components)
 import styled from "@mui/material/styles/styled";
@@ -20,7 +21,7 @@ import TextField from "@mui/material/TextField";
 import { getFieldValues, clearFieldValues, saveFieldValues } from "./fieldValues";
 import ConfirmAddProdDialog from "./ConfirmAddProdDialog";
 import ConfirmClearDialog from "./ConfirmClearDialog";
-import ErrorDialog from "./ErrorDialog";
+import AddProdErrorDialog from "./AddProdErrorDialog";
 
 // Styles the modal
 const ModalContainer = styled(Box)(({ theme }) => ({
@@ -49,12 +50,6 @@ const FormContainer = styled(Box)({
 // Used to valify that the URL location of product starts with "https://github.com/bcgov/"
 const locationPattern = new RegExp("https://github.com/bcgov/.+");
 
-// Additional validattions, use if needed
-// const validationSchema = object({
-//   // nickname: string().required().trim().min(2).max(50),
-//   // password: string().required().min(5).max(100)
-// });
-
 // Modal containing the form to add a new product
 export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
   // Used to open or close submit and clear confirmation dialogs
@@ -62,7 +57,7 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
   const [isClearDialOpen, setIsClearDialOpen] = useState(false);
   // Used to open the error dialog when submit fails
   const [isErrorDialOpen, setIsErrorDialOpen] = useState(false);
-  const { current: errorObj } = useRef({});
+  const errorRef = useRef("");
 
   // Callback that runs when the form is submitted
   const onSubmit = useCallback(
@@ -87,28 +82,26 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
         body: JSON.stringify(shapedValues)
       })
         .then(async (response) => {
-          // Request was successful
-          // Indicates whether or not API successfully committed the data
-          const resObj = await response.json();
-          if (resObj.wasSuccessful) {
-            // Update the interface with optimistic response
-            dispatch({ type: "addedNewProd", data: resObj.data });
-            resetForm({ values: clearFieldValues() });
-            setIsOpen(false);
-          } else {
-            errorObj.errorType = "Validation Error";
-            errorObj.errorMsg = resObj.error;
-            setIsErrorDialOpen(true);
+          // Response health check
+          if (!response.ok) {
+            throw new Error(await response.text());
           }
+          // Response is healthy
+          const resObj = await response.json();
+          // Update the interface
+          dispatch({ type: "addedNewProd", data: resObj });
+          // Reset the form
+          resetForm({ values: clearFieldValues() });
+          // Close the modal
+          setIsOpen(false)
         })
         .catch((error) => {
-          // Request failed. There was a network error
-          errorObj.errorType = "Network Error";
-          errorObj.errorMsg = error;
+          // Catches both network errors (no response) and unhealthy response errors
+          errorRef.current = error.message;
           setIsErrorDialOpen(true);
         });
     },
-    [dispatch, setIsOpen, errorObj]
+    [dispatch, setIsOpen, errorRef]
   );
 
   return (
@@ -461,11 +454,10 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                 clearFields={clearFieldValues}
                 resetForm={resetForm}
               />
-              <ErrorDialog
+              <AddProdErrorDialog
                 isOpen={isErrorDialOpen}
                 setIsOpen={setIsErrorDialOpen}
-                errorType={errorObj.errorType}
-                errorMsg={errorObj.errorMsg}
+                errorRef={errorRef}
                 setIsModalOpen={setIsOpen}
               />
             </FormContainer>

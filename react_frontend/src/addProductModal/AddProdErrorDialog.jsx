@@ -5,24 +5,24 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-// Pop-up dialog. Confirms before clearing form fields
-export default function ErrorDialog({ isOpen, setIsOpen, errorType, errorMsg, setIsModalOpen }) {
+// Pop-up dialog to indicate failure of adding a new product
+export default function AddProdErrorDialog({ isOpen, setIsOpen, errorRef, setIsModalOpen }) {
   return (
     <Dialog
       open={isOpen}
-      onClose={() => setIsOpen(false)}
-      aria-labelledby="error-dialog"
-      aria-describedby="error-dialog-description"
+      aria-labelledby="add-product-error-dialog"
+      aria-describedby="add-product-error-dialog-description"
     >
-      <DialogTitle id="error-dialog">{errorType}</DialogTitle>
+      <DialogTitle id="add-product-error-dialog">Error. Product was not created.</DialogTitle>
       <DialogContent>
-        <DialogContentText id="error-dialog-description">
-          {"The product was not created. Error message: " + errorMsg}
+        <DialogContentText id="add-product-error-dialog-description">
+          {errorRef.current}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button
           onClick={() => {
+            errorRef.current = "";
             setIsOpen(false);
             setIsModalOpen(false);
           }}
