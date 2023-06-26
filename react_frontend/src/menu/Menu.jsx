@@ -31,6 +31,7 @@ export default function Menu({ setIsAddProdModalOpen, productTotal }) {
           alignItems: "center"
         }}
       >
+        {/* Logo and title */}
         <Stack
           direction="row"
           alignItems="center"
@@ -53,6 +54,7 @@ export default function Menu({ setIsAddProdModalOpen, productTotal }) {
             Kwan-Lee-ecc-dssb-IS21-code-challenge-req101408
           </Typography>
         </Stack>
+        {/* Displays total number of products */}
         <Typography
           variant="body1"
           component="h1"
@@ -70,6 +72,7 @@ export default function Menu({ setIsAddProdModalOpen, productTotal }) {
           alignItems="center"
           spacing={2}
         >
+          {/* Add new product button */}
           <Button
             variant="contained"
             startIcon={<AddIcon />}
