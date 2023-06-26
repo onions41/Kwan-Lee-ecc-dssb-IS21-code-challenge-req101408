@@ -1,13 +1,18 @@
-import { Container, Box } from "@mui/material";
 import { useState, useEffect, useReducer } from "react";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
-// Components
+// Internal imports
 import Menu from "./menu/Menu";
 import ProductsTable from "./productsTable/ProductsTable";
 import AddProductModal from "./addProductModal/AddProductModal";
 
+// The landing page. Renders list of all products
 export default function App() {
+  // Used to indicate the result of fetching the list of all products
   const [prodFetchState, setProdFetchState] = useState({ loading: true, error: false });
+  // Used to update the UI when products are fetched, added, or edited
   const [products, prodDispatch] = useReducer((products, action) => {
     switch (action.type) {
       case "fetchedAllProd":
@@ -26,30 +31,44 @@ export default function App() {
   }, []);
   const [isAddProdModalOpen, setIsAddProdModalOpen] = useState(false);
 
+  // Makes the request to fetch the list of all products
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_SERVER_URL}/product`, {
       method: "GET"
     })
       .then(async (response) => {
+        // Response health check
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+        // Response is healthy
         const resData = await response.json();
-        // If the API retursns 500. there won't be an error, there. You need to catch that error.
+        // Loads fetched data into UI state
         prodDispatch({ type: "fetchedAllProd", data: resData });
         setProdFetchState({ loading: false, error: false });
       })
       .catch((error) => {
-        // Connection error
-        setProdFetchState({ loading: false, error });
+        // Catches both network errors (no response) and unhealthy response errors
+        setProdFetchState({ loading: false, error: error.message });
       });
   }, []);
 
+  // Displays while loading
   if (prodFetchState.loading) {
-    return <div>Loading</div>;
+    return <Typography variant="h5">Loading</Typography>;
   }
 
+  // Displays if there was an error
   if (prodFetchState.error) {
-    return <div>There was some error</div>;
+    return (
+      <>
+        <Typography variant="h5">There was an error when fetching the list of all products.</Typography>
+        <Typography variant="h5">{prodFetchState.error}</Typography>
+      </>
+    );
   }
 
+  // Displays the App
   return (
     <Box
       sx={{
@@ -59,19 +78,25 @@ export default function App() {
         flexDirection: "column"
       }}
     >
+      {/* Top bar menu */}
       <Menu
         setIsAddProdModalOpen={setIsAddProdModalOpen}
         productTotal={products.length}
       />
       <Container
         maxWidth="xl"
-        // root edited to remove default horizontal padding
+        // Root edited to remove default horizontal padding
         sx={{ flexGrow: 1, "&.MuiContainer-root": { padding: "0px" } }}
       >
         <Box sx={{ width: "100%", height: "100%", padding: "20px 0 0" }}>
-          <ProductsTable products={products} dispatch={prodDispatch} />
+          {/* Table displaying all products */}
+          <ProductsTable
+            products={products}
+            dispatch={prodDispatch}
+          />
         </Box>
       </Container>
+      {/* Modal for adding a new product */}
       <AddProductModal
         isOpen={isAddProdModalOpen}
         setIsOpen={setIsAddProdModalOpen}
