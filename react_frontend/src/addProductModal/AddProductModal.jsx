@@ -93,7 +93,7 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
           // Reset the form
           resetForm({ values: clearFieldValues() });
           // Close the modal
-          setIsOpen(false)
+          setIsOpen(false);
         })
         .catch((error) => {
           // Catches both network errors (no response) and unhealthy response errors
@@ -128,23 +128,13 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
           onSubmit={onSubmit}
         >
           {/* Formik child component (fields, buttons, confirmation dialogs) */}
-          {({
-            values,
-            handleChange,
-            handleSubmit,
-            // errors,
-            handleBlur,
-            isSubmitting,
-            // touched,
-            resetForm
-          }) => (
+          {({ values, handleChange, handleSubmit, handleBlur, isSubmitting, resetForm }) => (
             <FormContainer>
               {/* Product Name field*/}
               <TextField
                 id="productName"
                 name="productName"
                 label="Product Name"
-                // helperText={errors?.productName && touched.productName && errors.productName}
                 type="text"
                 autoComplete="productName"
                 variant="filled"
@@ -155,7 +145,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.productName && touched.productName}
                 autoFocus
                 sx={{
                   width: "calc(50% - 12px)",
@@ -169,9 +158,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                 id="productOwnerName"
                 name="productOwnerName"
                 label="Owner"
-                // helperText={
-                //   errors?.productOwnerName && touched.productOwnerName && errors.productOwnerName
-                // }
                 type="text"
                 size="small"
                 variant="filled"
@@ -181,7 +167,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.productOwnerName && touched.productOwnerName}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -192,9 +177,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                 id="scrumMasterName"
                 name="scrumMasterName"
                 label="Scrum Master"
-                // helperText={
-                //   errors?.scrumMasterName && touched.scrumMasterName && errors.scrumMasterName
-                // }
                 type="text"
                 size="small"
                 variant="filled"
@@ -204,7 +186,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.scrumMasterName && touched.scrumMasterName}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -224,9 +205,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                 id="developer1Name"
                 name="developer1Name"
                 label="Developer 1"
-                // helperText={
-                //   errors?.developer1Name && touched.developer1Name && errors.developer1Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
@@ -236,7 +214,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.developer1Name && touched.developer1Name}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -247,9 +224,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                 id="developer2Name"
                 name="developer2Name"
                 label="Developer 2"
-                // helperText={
-                //   errors?.developer2Name && touched.developer2Name && errors.developer2Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
@@ -259,7 +233,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.developer2Name && touched.developer2Name}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -270,9 +243,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                 id="developer3Name"
                 name="developer3Name"
                 label="Developer 3"
-                // helperText={
-                //   errors?.developer3Name && touched.developer3Name && errors.developer3Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
@@ -283,7 +253,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.developer3Name && touched.developer3Name}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -294,9 +263,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                 id="developer4Name"
                 name="developer4Name"
                 label="Developer 4"
-                // helperText={
-                //   errors?.developer4Name && touched.developer4Name && errors.developer4Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
@@ -306,7 +272,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.developer4Name && touched.developer4Name}
                 sx={{
                   marginTop: 1,
                   marginBottom: 1
@@ -317,9 +282,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                 id="developer5Name"
                 name="developer5Name"
                 label="Developer 5"
-                // helperText={
-                //   errors?.developer5Name && touched.developer5Name && errors.developer5Name
-                // }
                 type="text"
                 size="small"
                 variant="filled"
@@ -329,7 +291,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.developer5Name && touched.developer5Name}
                 sx={{
                   width: "calc(50% - 12px)",
                   marginTop: 1,
@@ -350,7 +311,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
               <TextField
                 id="startDate"
                 name="startDate"
-                // helperText={errors?.startDate && touched.startDate && errors.startDate}
                 type="text"
                 size="small"
                 variant="outlined"
@@ -360,7 +320,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.startDate && touched.startDate}
                 inputProps={{ type: "date" }}
                 sx={{
                   marginTop: 0,
@@ -406,7 +365,6 @@ export default function AddProductModal({ isOpen, setIsOpen, dispatch }) {
                   saveFieldValues(values);
                 }}
                 onBlur={handleBlur}
-                // error={errors?.location && touched.location}
                 sx={{
                   marginTop: 1,
                   marginBottom: 5,
