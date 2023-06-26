@@ -181,6 +181,7 @@ function itemContent(setEditProdModalState, index, row) {
                 target="_blank"
                 rel="noopener"
                 underline="hover"
+                sx={{ overflowWrap: "break-word" }}
               >
                 {row[column.dataKey]}
               </Link>
