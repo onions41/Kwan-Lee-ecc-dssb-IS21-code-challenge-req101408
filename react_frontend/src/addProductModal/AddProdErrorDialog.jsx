@@ -6,7 +6,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 // Pop-up dialog to indicate failure of adding a new product
-export default function AddProdErrorDialog({ isOpen, setIsOpen, errorRef, setIsModalOpen }) {
+export default function AddProdErrorDialog({ isOpen, setIsOpen, errorRef }) {
   return (
     <Dialog
       open={isOpen}
@@ -24,7 +24,6 @@ export default function AddProdErrorDialog({ isOpen, setIsOpen, errorRef, setIsM
           onClick={() => {
             errorRef.current = "";
             setIsOpen(false);
-            setIsModalOpen(false);
           }}
         >
           Okay
