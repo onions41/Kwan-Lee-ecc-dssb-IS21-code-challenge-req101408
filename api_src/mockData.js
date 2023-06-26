@@ -434,41 +434,5 @@ module.exports = [
     startDate: "2022-12-31",
     methodology: "Agile",
     location: "https://github.com/bcgov/techwhiz"
-  },
-  {
-    productId: "add9d7a9-9df6-45ae-b50f-9248134fa333",
-    productName: "WebNinja",
-    productOwnerName: "David Hernandez",
-    developers: [
-      "Andrew White",
-      "Scarlett Adams",
-      "Isabella Wilson",
-      "Benjamin Young",
-      "Gabriel Turner"
-    ],
-    scrumMasterName: "Grace Phillips",
-    startDate: "2015-11-01",
-    methodology: "Agile",
-    location: "https://github.com/bcgov/webninja"
-  },
-  {
-    productId: "2edd808f-ec09-4c52-b28d-d98835d74ea6",
-    productName: "AppGenius",
-    productOwnerName: "Abigail Moore",
-    developers: ["Joseph Taylor", "Emma Johnson", "Benjamin Young"],
-    scrumMasterName: "Elijah Reed",
-    startDate: "2020-08-11",
-    methodology: "Agile",
-    location: "https://github.com/bcgov/appgenius"
-  },
-  {
-    productId: "d612dbdd-34ce-46c6-9968-f27ee2e75424",
-    productName: "CodeSensei",
-    productOwnerName: "Hannah Collins",
-    developers: ["John Smith", "Chloe Ramirez"],
-    scrumMasterName: "Elizabeth Walker",
-    startDate: "2016-02-13",
-    methodology: "Agile",
-    location: "https://github.com/bcgov/codesensei"
   }
 ];
