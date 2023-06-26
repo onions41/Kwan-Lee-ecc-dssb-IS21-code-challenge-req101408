@@ -1,0 +1,150 @@
+openapi: 3.0.0
+servers:
+  - url: http://localhost:3000
+info:
+  title: Kwan-Lee-ecc-dssb-IS21-code-challenge-req101408
+  version: 1.0.0
+  contact:
+    email: kblee89@outlook.com
+paths:
+  /:
+    get:
+      description: Serves the frontend application
+      responses:
+        200:
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+  /api/product:
+    get:
+      description: Returns an array containing all products
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        500:
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      description: Creates a new product
+      parameters:
+        - in: query
+          name: ProductWithoutId
+          description: The new product without its product number.
+          required: true
+          schema:
+            $ref: "#/components/schemas/ProductWithoutId"
+      responses:
+        200:
+          description: OK. Returns the created product with a generated product number
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        422:
+          description: Unprocessable Content. Form was not filled out correctly
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Error"
+        500:
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/product/{productId}:
+    put:
+      description: Edits an existing product
+      parameters:
+      - in: path
+        name: productId
+        description: The product number of the product to be edited
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - in: query
+        name: Product
+        description: The product with its edited fields
+        required: true
+        schema:
+          $ref: "#/components/schemas/Product"
+      responses:
+        200:
+          description: OK. Returns the edited product
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        422:
+          description: Unprocessable Content. Form was not filled out correctly
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Error"
+        500:
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        productId:
+          type: string
+        productName:
+          type: string
+        productOwnerName:
+          type: string
+        scrumMasterName:
+          type: string
+        developers:
+          description: "Developer names. Up to 5 developers."
+          type: array
+          items:
+            type: string
+        startDate: 
+          type: string
+        methodology:
+          type: string
+        location:
+          type: string
+    ProductWithoutId:
+      description: The product before its product number (ID) is generated
+      type: object
+      properties:
+        productName:
+          type: string
+        productOwnerName:
+          type: string
+        scrumMasterName:
+          type: string
+        developers:
+          description: "Developer names. Up to 5 developers."
+          type: array
+          items:
+            type: string
+        startDate: 
+          type: string
+        methodology:
+          type: string
+        location:
+          type: string
+    Error:
+      description: Error message
+      type: string
